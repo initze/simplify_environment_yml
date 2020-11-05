@@ -1,9 +1,9 @@
 
-import os
 import argparse
 
+
 def fix_config_file(line):
-    if ((line.count('=') == 2) & ('==' not in line)):
+    if (line.count('=') == 2) & ('==' not in line):
         ll = '='.join(line.split('=')[:-1])
         if not ll.endswith('\n'):
             ll = ll + '\n'
@@ -11,8 +11,6 @@ def fix_config_file(line):
     else:
         return line
 
-FILEPATH = 'environment.yml'
-FILEPATH_OUT = 'environment_new.yml'
 
 def main():
     """
@@ -31,10 +29,11 @@ def main():
 
     with open(args.infile) as f:
         lines = f.readlines()
-        new_lines = [fix_config_file(l) for l in lines]
+        new_lines = [fix_config_file(line) for line in lines]
 
     with open(args.outfile, 'w') as dst:
         dst.writelines(new_lines)
+
 
 if __name__ == "__main__":
     main()
